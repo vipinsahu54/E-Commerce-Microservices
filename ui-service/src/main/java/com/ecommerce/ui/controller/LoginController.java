@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ecommerce.ui.service.AccountService;
-import com.ecommerce.ui.service.CustomerService;
+import com.ecommerce.ui.service.UserService;
 import com.ecommerce.ui.model.Customer;
 import com.ecommerce.ui.model.Login;
 
@@ -23,7 +23,7 @@ public class LoginController {
 	private AccountService accountService;
 	
 	@Autowired
-	private CustomerService CustomerService;
+	private UserService CustomerService;
 	
 	@GetMapping(value="/login")
 	public ModelAndView signUp(HttpServletRequest request) {
@@ -47,10 +47,6 @@ public class LoginController {
 			model.setViewName("signin");
 			return model;
 		}
-//		model.addObject("pages", 1);
-//		model.setViewName("index");
-//		
-//		return model;
 		
 		return new ModelAndView("redirect:/index", models);
 	}

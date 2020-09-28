@@ -1,4 +1,4 @@
-package com.ecommerce.ui.model;
+package com.ecommerce.order.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

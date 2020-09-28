@@ -10,7 +10,7 @@ spring:
     config:
       server:
         git:
-          uri: file://C:/Users/coolb/Desktop/config
+          uri: file://C:/Users/vipin/Desktop/config
 
 
 server:

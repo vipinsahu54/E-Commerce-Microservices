@@ -1,10 +1,15 @@
-package com.ecommerce.ui.model;
+package com.ecommerce.ui.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.ecommerce.ui.model.Item;
 
 @Entity
 @Table(name="CART_ITEM")
@@ -16,11 +21,9 @@ public class CartItems {
 	
 	private int quantity;
 	
-//	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-//	private Item item;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private Item item;
 
-	private Long itemid;
-	
 	public Long getId() {
 		return id;
 	}
@@ -37,13 +40,12 @@ public class CartItems {
 		this.quantity = quantity;
 	}
 
-	public Long getItemid() {
-		return itemid;
+	public Item getItem() {
+		return item;
 	}
 
-	public void setItemid(Long itemid) {
-		this.itemid = itemid;
+	public void setItem(Item item) {
+		this.item = item;
 	}
-
 	
 }

@@ -1,4 +1,4 @@
-package com.ecommerce.ui.model;
+package com.ecommerce.ui.dto;
 
 import java.util.Date;
 
@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.ecommerce.ui.model.Account;
+import com.ecommerce.ui.model.Address;
 
 @Entity
 @Table(name="CUSTOMERS")
@@ -26,7 +29,8 @@ public class Customer {
 	@OneToOne
 	private Account account;
 	
-	private Long cartid;
+	@OneToOne
+	private Cart cart;
 	
 	@OneToOne
 	private Address address;
@@ -101,15 +105,17 @@ public class Customer {
 	}
 
 	
-	public Long getCartid() {
-		return cartid;
+
+	public Cart getCart() {
+		return cart;
 	}
 
 
-	public void setCartid(Long cartid) {
-		this.cartid = cartid;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
+	
 
 	public String getEmail() {
 		return email;

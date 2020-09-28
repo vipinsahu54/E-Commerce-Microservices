@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ecommerce.ui.service.CartService;
-import com.ecommerce.ui.service.CustomerService;
 import com.ecommerce.ui.model.Cart;
 import com.ecommerce.ui.model.CartItems;
 import com.ecommerce.ui.model.Customer;
+import com.ecommerce.ui.service.CartService;
+import com.ecommerce.ui.service.ItemService;
+import com.ecommerce.ui.service.UserService;
 
 @RestController
 @RequestMapping("/cart")
@@ -26,7 +27,10 @@ public class CartController {
 	private CartService cartService;
 	
 	@Autowired
-	private CustomerService customerService;
+	private UserService customerService;
+	
+	@Autowired
+	private ItemService itemService;
 	
 	@GetMapping("/additem/{itemid}/{qty}")
 	public Cart addItem(@PathVariable("itemid")Long itemId,@PathVariable("qty")Integer qty,HttpServletRequest request) {
@@ -53,8 +57,8 @@ public class CartController {
 		else {
 			long customerId = (Long)session.getAttribute("userid");
 			Customer customer = customerService.getCustById(customerId);
-			Cart cart = cartService.getCartById(customer.getCart().getId());
-			int total=cart.getItems().stream().mapToInt(obj -> obj.getQuantity() * obj.getItem().getPrice()).sum();
+			Cart cart = cartService.getCartById(customer.getCartid());
+			int total=cart.getItems().stream().mapToInt(obj -> obj.getQuantity() * itemService.getById(obj.getItemid()).getPrice()).sum();
 			model.addObject("cart",cart);
 			model.addObject("totalCart",total);
 			model.addObject("customer",customer);
@@ -70,11 +74,10 @@ public class CartController {
 		if(session.getAttribute("userid") != null) {
 			long customerId = (Long)session.getAttribute("userid");
 			Customer customer = customerService.getCustById(customerId);
-			Cart cart = cartService.getCartById(customer.getCart().getId());
+			Cart cart = cartService.getCartById(customer.getCartid());
 			
 			for (CartItems items : cart.getItems()) {
-				if(items.getItem().getId().equals(id)) {
-					System.out.println(items.getItem().getId()+"-- "+items.getQuantity());
+				if(items.getItemid().equals(id)) {
 					items.setQuantity(items.getQuantity()-1);
 				}
 			}
@@ -88,11 +91,10 @@ public class CartController {
 		if(session.getAttribute("userid") != null) {
 			long customerId = (Long)session.getAttribute("userid");
 			Customer customer = customerService.getCustById(customerId);
-			Cart cart = cartService.getCartById(customer.getCart().getId());
+			Cart cart = cartService.getCartById(customer.getCartid());
 			
 			for (CartItems items : cart.getItems()) {
-				if(items.getItem().getId().equals(id)) {
-					System.out.println(items.getItem().getId()+"-- "+items.getQuantity());
+				if(items.getItemid().equals(id)) {
 					items.setQuantity(items.getQuantity()+1);
 				}
 			}
