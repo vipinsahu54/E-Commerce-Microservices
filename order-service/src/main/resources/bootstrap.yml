@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8167
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:h2:file:~/data/order
+server:
+  port: 8300
