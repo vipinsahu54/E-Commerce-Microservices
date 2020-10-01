@@ -35,6 +35,7 @@ public class LoginController {
 	@PostMapping(value = "/login")
 	public ModelAndView loginUser(@ModelAttribute("loginModel") Login login,HttpServletRequest request, ModelMap models) {
 		ModelAndView model=new ModelAndView();
+		System.out.println(login);
 		Customer customer=null;
 		if(login.getUsername().contains(".com") &&  login.getUsername().contains("@")) {
 			customer=CustomerService.getAccountByEmail(login.getUsername());

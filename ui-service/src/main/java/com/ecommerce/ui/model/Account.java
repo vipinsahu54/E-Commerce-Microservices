@@ -1,22 +1,9 @@
 package com.ecommerce.ui.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
-@Table(name="ACCOUNTS")
 public class Account {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String username;
-	@JsonIgnore
 	private String password;
 
 	public int getId() {
@@ -41,6 +28,11 @@ public class Account {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
 	
 }

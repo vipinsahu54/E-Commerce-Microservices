@@ -16,6 +16,8 @@ import com.ecommerce.ui.model.Cart;
 import com.ecommerce.ui.model.CartItems;
 import com.ecommerce.ui.model.Customer;
 import com.ecommerce.ui.model.Order;
+import com.ecommerce.ui.model.OrderItem;
+import com.ecommerce.ui.service.CartModelService;
 import com.ecommerce.ui.service.CartService;
 import com.ecommerce.ui.service.ItemService;
 import com.ecommerce.ui.service.OrderService;
@@ -35,6 +37,9 @@ public class OrderController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private CartModelService cartModelService;
 	
 	@GetMapping("/checkout")
 	public ModelAndView getCheckout(HttpServletRequest request) {
@@ -66,17 +71,21 @@ public class OrderController {
 		view.setItems(list);
 		 
 		Order order=new Order();
-		Cart orderCart=new Cart();
-		cart.setItems(cart.getItems());
-//		order.setCart(orderCart);
-		order.setCartid(orderCart.getId());
+		List<OrderItem> itemsList=new ArrayList<>();
+		for (CartItems cartItems : cart.getItems()) {
+			OrderItem orderItem=new OrderItem();
+			orderItem.setItemid(cartItems.getItemid());
+			orderItem.setQty(cartItems.getQuantity());
+			itemsList.add(orderItem);
+		}
+		order.setItems(itemsList);
 		order.setDiscount(0);
 		order.setPaymentType("CASH");
 		order.setTotalAmount(total);
 		Order newOrder=orderService.save(order);
 		
 		model.addObject("orderid",newOrder.getId());
-		model.addObject("cart",view);
+		model.addObject("cart",cartModelService.getCart(view));
 		model.addObject("totalCart",total);
 		model.addObject("customer",customer);
 		model.setViewName("confirmation");

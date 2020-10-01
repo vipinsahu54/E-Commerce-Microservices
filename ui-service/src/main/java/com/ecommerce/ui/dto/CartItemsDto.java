@@ -1,13 +1,15 @@
-package com.ecommerce.ui.model;
+package com.ecommerce.ui.dto;
 
-public class CartItems {
+import com.ecommerce.ui.model.Item;
+
+public class CartItemsDto {
 
 	private Long id;
 	
 	private int quantity;
 	
-	private Long itemid;
-	
+	private Item item;
+
 	public Long getId() {
 		return id;
 	}
@@ -24,13 +26,12 @@ public class CartItems {
 		this.quantity = quantity;
 	}
 
-	public Long getItemid() {
-		return itemid;
+	public Item getItem() {
+		return item;
 	}
 
-	public void setItemid(Long itemid) {
-		this.itemid = itemid;
+	public void setItem(Item item) {
+		this.item = item;
 	}
-
 	
 }

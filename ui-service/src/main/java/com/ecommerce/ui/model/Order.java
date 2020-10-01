@@ -1,27 +1,19 @@
 package com.ecommerce.ui.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
 
-@Entity
-@Table(name="ORDERS")
 public class Order {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+private Long id;
 	
 	private String orderid;
 	private String paymentType;
 	private int totalAmount;
 	private int discount;
-	
 	private Long offerid;
 	
-	private Long cartid;
+	private List<OrderItem> items;
+	
 
 	public Long getId() {
 		return id;
@@ -71,18 +63,19 @@ public class Order {
 		this.offerid = offerid;
 	}
 
-	public Long getCartid() {
-		return cartid;
+	public List<OrderItem> getItems() {
+		return items;
 	}
 
-	public void setCartid(Long cartid) {
-		this.cartid = cartid;
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
 	}
 
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", orderid=" + orderid + ", paymentType=" + paymentType + ", totalAmount="
-				+ totalAmount + ", discount=" + discount + ", offerid=" + offerid + ", cartid=" + cartid + "]";
+				+ totalAmount + ", discount=" + discount + ", offerid=" + offerid + ", items=" + items + "]";
 	}
+
 
 }

@@ -15,7 +15,9 @@ public class AccountService {
 	
 	
 	public boolean validateUser(Login login) {
+		System.out.println(login);
 		Customer customer = userService.getAccountByEmail(login.getUsername());
+		System.out.println(customer);
 		if(customer.getAccount().getPassword().equals(login.getPassword()))
 			return true;
 		return false;

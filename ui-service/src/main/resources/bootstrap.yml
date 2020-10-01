@@ -16,4 +16,4 @@ security:
     enabled: false
     
 server:
-  port: 8005
+  port: 8500

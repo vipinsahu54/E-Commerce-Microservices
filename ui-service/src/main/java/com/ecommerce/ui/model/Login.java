@@ -17,5 +17,10 @@ public class Login {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	@Override
+	public String toString() {
+		return "Login [username=" + username + ", password=" + password + "]";
+	}
+	
 	
 }

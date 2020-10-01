@@ -2,22 +2,11 @@ package com.ecommerce.ui.dto;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.ecommerce.ui.model.Account;
 import com.ecommerce.ui.model.Address;
 
-@Entity
-@Table(name="CUSTOMERS")
-public class Customer {
+public class CustomerDto {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String firstName;
 	private String lastName;
@@ -26,13 +15,10 @@ public class Customer {
 	private Long mobileNumber;
 	private String email;
 	
-	@OneToOne
 	private Account account;
 	
-	@OneToOne
-	private Cart cart;
+	private CartDto cart;
 	
-	@OneToOne
 	private Address address;
 	
 	public Long getId() {
@@ -106,12 +92,12 @@ public class Customer {
 
 	
 
-	public Cart getCart() {
+	public CartDto getCart() {
 		return cart;
 	}
 
 
-	public void setCart(Cart cart) {
+	public void setCart(CartDto cart) {
 		this.cart = cart;
 	}
 

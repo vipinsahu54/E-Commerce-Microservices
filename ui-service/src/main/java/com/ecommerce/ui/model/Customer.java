@@ -2,19 +2,8 @@ package com.ecommerce.ui.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="CUSTOMERS")
 public class Customer {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String firstName;
 	private String lastName;
@@ -23,12 +12,10 @@ public class Customer {
 	private Long mobileNumber;
 	private String email;
 	
-	@OneToOne
 	private Account account;
 	
 	private Long cartid;
 	
-	@OneToOne
 	private Address address;
 	
 	public Long getId() {
@@ -134,7 +121,9 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob
-				+ ", gender=" + gender + ", mobileNumber=" + mobileNumber + "]";
+				+ ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", email=" + email + ", account=" + account
+				+ ", cartid=" + cartid + ", address=" + address + "]";
 	}
-	
+
+
 }

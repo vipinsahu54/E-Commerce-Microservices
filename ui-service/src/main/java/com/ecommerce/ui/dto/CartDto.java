@@ -1,12 +1,12 @@
-package com.ecommerce.ui.model;
+package com.ecommerce.ui.dto;
 
 import java.util.List;
 
-public class Cart {
+public class CartDto {
 
 	private Long id;
 	
-	private List<CartItems> items;
+	private List<CartItemsDto> items;
 
 	public Long getId() {
 		return id;
@@ -16,11 +16,11 @@ public class Cart {
 		this.id = id;
 	}
 
-	public List<CartItems> getItems() {
+	public List<CartItemsDto> getItems() {
 		return items;
 	}
 
-	public void setItems(List<CartItems> items) {
+	public void setItems(List<CartItemsDto> items) {
 		this.items = items;
 	}
 

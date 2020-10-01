@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ecommerce.ui.dto.CartDto;
 import com.ecommerce.ui.model.Cart;
 import com.ecommerce.ui.model.CartItems;
 import com.ecommerce.ui.model.Customer;
+import com.ecommerce.ui.service.CartModelService;
 import com.ecommerce.ui.service.CartService;
 import com.ecommerce.ui.service.ItemService;
 import com.ecommerce.ui.service.UserService;
@@ -31,6 +33,9 @@ public class CartController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private CartModelService cartModelService;
 	
 	@GetMapping("/additem/{itemid}/{qty}")
 	public Cart addItem(@PathVariable("itemid")Long itemId,@PathVariable("qty")Integer qty,HttpServletRequest request) {
@@ -59,13 +64,19 @@ public class CartController {
 			Customer customer = customerService.getCustById(customerId);
 			Cart cart = cartService.getCartById(customer.getCartid());
 			int total=cart.getItems().stream().mapToInt(obj -> obj.getQuantity() * itemService.getById(obj.getItemid()).getPrice()).sum();
-			model.addObject("cart",cart);
+			model.addObject("cart",cartModelService.getCart(cart));
 			model.addObject("totalCart",total);
 			model.addObject("customer",customer);
 			model.addObject("username",customer.getAccount().getUsername());
 			model.setViewName("cart");
 		}
 		return model;
+	}
+	
+	@GetMapping("/test")
+	public CartDto getTestCart() {
+		Cart cart = cartService.getCartById(1001l);
+		return cartModelService.getCart(cart);
 	}
 	
 	@GetMapping("/decrease/{id}")
